@@ -13,6 +13,8 @@ The main purpose of this project is to learn how a Python Flask backend can work
 * Individual blog post pages
 * About page
 * Contact page
+* Contact form for sending messages via email
+* Receive user messages through email
 * Navigation between different pages
 * Query parameters used to send post data to the blog post page
 
@@ -25,6 +27,7 @@ The main purpose of this project is to learn how a Python Flask backend can work
 * **HTML5**
 * **CSS3**
 * **Requests**
+* **smtplib**
 * **REST API**
 
 ## 📡 API Integration
@@ -44,6 +47,41 @@ return render_template("index.html", response=response)
 
 Jinja2 is then used to display the posts dynamically in the HTML page.
 
+## 📧 Contact Form & Email
+
+The website includes a contact form where users can enter their **name, email address, phone number, and message**.
+
+When the form is submitted, Flask receives the form data using a `POST` request:
+
+```python
+Name = request.form["name"]
+Email = request.form["email"]
+Phone = request.form["phone"]
+Messages = request.form["message"]
+```
+
+The message is then sent via email using Python's built-in `smtplib` library.
+
+```python
+with smtplib.SMTP("smtp.gmail.com", 587) as connection:
+    connection.starttls()
+    connection.login("your_email@gmail.com", "your_app_password")
+
+    connection.sendmail(
+        from_addr="your_email@gmail.com",
+        to_addrs="receiver@gmail.com",
+        msg=f"""Subject: New Contact Message
+
+Name: {Name}
+Email: {Email}
+Phone: {Phone}
+Message: {Messages}
+"""
+    )
+```
+
+This allows the website owner to **receive messages submitted through the Contact page directly via email**.
+
 ## 🔄 How It Works
 
 The application follows this basic flow:
@@ -60,6 +98,22 @@ Jinja2 Template
 Bootstrap + HTML
      ↓
 Web Browser
+```
+
+For the Contact page, the flow is:
+
+```text
+Contact Form
+     ↓
+POST Request
+     ↓
+Flask
+     ↓
+Python smtplib
+     ↓
+Email
+     ↓
+Website Owner
 ```
 
 When the home page is opened, Flask fetches the blog data from the API and sends it to `index.html`.
@@ -150,15 +204,18 @@ This project was created to practice:
 
 * Flask application structure
 * Flask routing
+* GET and POST requests
 * Rendering HTML templates
 * Jinja2 template syntax
 * Passing data from Python to HTML
 * Handling URL query parameters with `request.args.get()`
+* Handling form data with `request.form`
 * Fetching data from an external API
 * Using the Python `requests` library
+* Sending emails using `smtplib`
 * Using Bootstrap components and responsive layouts
 * Connecting frontend templates with a Python backend
 
 ## 👨‍💻 Purpose
 
-This is a **learning-based project** created to understand the fundamentals of building a dynamic website with **Flask and Bootstrap** and to learn how an external API can be integrated into a web application.
+This is a **learning-based project** created to understand the fundamentals of building a dynamic website with **Flask and Bootstrap**, integrating an external API, using Jinja2 for dynamic content, handling contact form submissions, and sending user messages via email.
