@@ -1,0 +1,32 @@
+{% include 'header.html' %}
+{% from 'Bootstrap5/form.html' import render_form %}
+<header class="masthead" style="background-image: url('https://media.istockphoto.com/id/2043823329/photo/internet-network-cybersecurity-concept-data-privacy-protection-from-malicious-attacks-digital.jpg?s=612x612&w=0&k=20&c=EdSpTwVaTVMvZUUHk4d13L1VJsb2PxnPxRPrlmtIxOw=')">
+  <div class="container position-relative px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="site-heading">
+          <h1>Login</h1>
+          <span class="subheading">Welcome Back</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="mb-4">
+  <div class="container">
+    <div class="row">
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      {% for message in messages %}
+      <p class="flash">{{ message }}</p>
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+      <div class="col-lg-8 col-md-10 mx-auto">
+        {{render_form(form)}}
+      </div>
+    </div>
+  </div>
+</main>
+{% include 'footer.html' %}

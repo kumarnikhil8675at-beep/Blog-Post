@@ -1,0 +1,27 @@
+{% include 'header.html' %}
+{% from 'Bootstrap5/form.html' import render_form %}
+<header
+  class="masthead"
+  style="background-image: url('https://images.stockcake.com/public/a/f/e/afedcd3b-d8ed-4fcb-a079-030b2f49d76c_large/hands-uniting-globally-stockcake.jpg')"
+>
+  <div class="container position-relative px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="site-heading">
+          <h1 class="fs-1">Create Your Account</h1>
+          <span class="subheading">Create your account today and become a part of our blogging community.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<main class="mb-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+      {{render_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+      </div>
+    </div>
+  </div>
+</main>
+{% include 'footer.html' %}
